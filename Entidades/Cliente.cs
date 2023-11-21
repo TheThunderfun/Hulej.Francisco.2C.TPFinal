@@ -11,21 +11,35 @@ namespace Hulej.Francisco._2C.TPFinal
     {
 
         private double tarjeta;
-        private Guid nTransaccion;
+        private Guid id;
         private int cantEntradas;
-
+        private int idPelicula;
         public double Tarjeta { get => tarjeta; set => tarjeta = value; }
-        public Guid NTransaccion { get => nTransaccion; }
+        public Guid Id { get => id; }
         public int CantEntradas { get => cantEntradas; set => cantEntradas = value; }
+        public int IdPelicula { get => idPelicula; set => idPelicula = value; }
 
-        public Cliente(string nombre, string apellido, double dni,double tarjeta, int cantEntradas) : base(nombre, apellido, dni)
+        public Cliente(string nombre, string apellido, double dni, double tarjeta, int cantEntradas, int idPelicula) : base(nombre, apellido, dni)
         {
             this.Tarjeta = tarjeta;
-            this.nTransaccion = Guid.NewGuid();
-            this.CantEntradas=cantEntradas;
+            this.id = Guid.NewGuid();
+            this.CantEntradas = cantEntradas;
+            this.IdPelicula = idPelicula;
+        }
+        
+        public List<Cliente> NuevoCliente(List<Cliente> listaClientes, string nombre, string apellido, double dni, double tarjeta, int cantEntradas, int idPelicula)
+        {
+            Cliente nuevoCliente = new Cliente(nombre, apellido, dni, tarjeta, cantEntradas, idPelicula);
+            listaClientes.Add(nuevoCliente);
+            return listaClientes;
+        }
+    
+        public List<Cliente> EliminarCliente(List<Cliente> listaClientes,Guid nTransABuscar)
+        {
+            Cliente clienteAEliminar = listaClientes.FirstOrDefault(cliente => cliente.id == nTransABuscar);
+            listaClientes.Remove(clienteAEliminar);
+            return listaClientes;
         }
 
-
- 
     }
 }
