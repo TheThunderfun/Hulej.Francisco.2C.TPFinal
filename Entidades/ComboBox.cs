@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hulej.Francisco._2C.TPFinal
 {
-    internal class ComboBox
+    internal class ComboBox:IProducto<ComboBox>
     {
         private string nombre;
         private int id;
@@ -28,6 +28,11 @@ namespace Hulej.Francisco._2C.TPFinal
             this.valor = valor;
             this.stock=stock;
 
+        }
+
+        public void QuitarProducto(ComboBox comboBox)
+        {
+            comboBox.stock--;
         }
     }
 }

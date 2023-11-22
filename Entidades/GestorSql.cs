@@ -18,10 +18,10 @@ namespace Hulej.Francisco._2C.TPFinal
 
 
 
-        public static void NuevoCliente(string nombre, string apellido, double dni, double tarjeta, int cantEntradas, int idPelicula, Guid nTransaccion)
+        public static void NuevoCliente(string nombre, string apellido, double dni, double tarjeta, int cantEntradas, int idPelicula, Guid nTransaccion,int idComboBox)
         {
             SqlConnection connection = new SqlConnection(GestorSql.stringConnection);
-            string sentencia = $"INSERT INTO Clientes (nombre, apellido, dni,tarjeta,nTransaccion,cantEntradas,idPelicula)"+ "VALUES (@nombre,@apellido,@dni,@tarjeta,@nTransaccion,@cantEntradas,@idPelicula)";
+            string sentencia = $"INSERT INTO Clientes (nombre, apellido, dni,tarjeta,nTransaccion,cantEntradas,idPelicula,idComboBox)"+ "VALUES (@nombre,@apellido,@dni,@tarjeta,@nTransaccion,@cantEntradas,@idPelicula,@idComboBox)";
             SqlCommand command = new SqlCommand(sentencia,connection);
 
             try
@@ -33,6 +33,7 @@ namespace Hulej.Francisco._2C.TPFinal
                 command.Parameters.AddWithValue("nTransaccion", nTransaccion);
                 command.Parameters.AddWithValue("cantEntradas", cantEntradas);
                 command.Parameters.AddWithValue("idPelicula", idPelicula);
+                command.Parameters.AddWithValue("idComboBOx", idComboBox);
                 connection.Open();
 
                 command.ExecuteNonQuery();
@@ -57,6 +58,7 @@ namespace Hulej.Francisco._2C.TPFinal
             double tarjeta;
             int cantEntradas;
             int idPeliculas;
+            int idComboBox;
             try
             {
                 SqlCommand command = new SqlCommand(sentencia, connection);
@@ -73,8 +75,9 @@ namespace Hulej.Francisco._2C.TPFinal
                     nTransaccion = Guid.Parse(reader.GetString(4));
                     cantEntradas = reader.GetInt32(5);
                     idPeliculas = reader.GetInt32(6);
-                    
-                    cliente = new Cliente(nombre, apellido, dni, tarjeta, cantEntradas, idPeliculas);
+                    idComboBox = reader.GetInt32(7);
+
+                    cliente = new Cliente(nombre, apellido, dni, tarjeta, cantEntradas, idPeliculas,idComboBox);
                     listaClientes.Add(cliente);
                 }
 
@@ -187,7 +190,7 @@ namespace Hulej.Francisco._2C.TPFinal
                 SqlCommand command = new SqlCommand(sentencia, connection);
                 connection.Open();
                 if(command.ExecuteNonQuery()==0) {
-                    //throw Exception;
+                    
                 
                 }
 

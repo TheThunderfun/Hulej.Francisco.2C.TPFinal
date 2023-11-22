@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hulej.Francisco._2C.TPFinal
 {
-    public class Pelicula
+    public class Pelicula:IProducto<Pelicula>
     {
         private string nombre;
         private int duracion;
@@ -34,7 +34,9 @@ namespace Hulej.Francisco._2C.TPFinal
             return listaPeliculas;
         }
 
-
-
+        public void QuitarProducto(Pelicula pelicula)
+        {
+            pelicula.cantEntradas--;
+        }
     }
 }

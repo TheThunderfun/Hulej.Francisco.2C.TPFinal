@@ -14,22 +14,25 @@ namespace Hulej.Francisco._2C.TPFinal
         private Guid id;
         private int cantEntradas;
         private int idPelicula;
+        private int idComboBox;
         public double Tarjeta { get => tarjeta; set => tarjeta = value; }
         public Guid Id { get => id; }
         public int CantEntradas { get => cantEntradas; set => cantEntradas = value; }
         public int IdPelicula { get => idPelicula; set => idPelicula = value; }
+        public int IdComboBox { get => idComboBox; set => idComboBox = value; }
 
-        public Cliente(string nombre, string apellido, double dni, double tarjeta, int cantEntradas, int idPelicula) : base(nombre, apellido, dni)
+        public Cliente(string nombre, string apellido, double dni, double tarjeta, int cantEntradas, int idPelicula, int idComboBox) : base(nombre, apellido, dni)
         {
             this.Tarjeta = tarjeta;
             this.id = Guid.NewGuid();
             this.CantEntradas = cantEntradas;
             this.IdPelicula = idPelicula;
+            this.idComboBox = idComboBox;
         }
-        
-        public List<Cliente> NuevoCliente(List<Cliente> listaClientes, string nombre, string apellido, double dni, double tarjeta, int cantEntradas, int idPelicula)
+
+        public List<Cliente> NuevoCliente(List<Cliente> listaClientes, string nombre, string apellido, double dni, double tarjeta, int cantEntradas, int idPelicula,int idComboBox)
         {
-            Cliente nuevoCliente = new Cliente(nombre, apellido, dni, tarjeta, cantEntradas, idPelicula);
+            Cliente nuevoCliente = new Cliente(nombre, apellido, dni, tarjeta, cantEntradas, idPelicula,idComboBox);
             listaClientes.Add(nuevoCliente);
             return listaClientes;
         }

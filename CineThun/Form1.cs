@@ -19,14 +19,11 @@ namespace CineThun
             InitializeComponent();
         }
 
-        private void Test_Click(object sender, EventArgs e)
+        private void Cliente_Click(object sender, EventArgs e)
         {
-            List<Cliente> clientes = new List<Cliente>();
-            GestorSql.GetAllClientes(clientes);
-            foreach (Cliente s in clientes)
-            {
-                MessageBox.Show(s.Id.ToString());
-            } 
+            this.Hide();
+            VistaCliente formCliente= new VistaCliente();
+            formCliente.ShowDialog();
         }
     }
 }
