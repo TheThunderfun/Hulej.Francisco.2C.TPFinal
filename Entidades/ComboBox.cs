@@ -30,9 +30,17 @@ namespace Hulej.Francisco._2C.TPFinal
 
         }
 
-        public void QuitarProducto(ComboBox comboBox)
+        public bool QuitarProducto(List<ComboBox> comboBox,string nombre)
         {
-            comboBox.stock--;
+            
+            foreach(ComboBox c in comboBox) {
+                if(c.nombre == nombre)
+                {
+                    c.stock--;
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

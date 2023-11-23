@@ -86,16 +86,16 @@
             cmbCantEntradas.FormattingEnabled = true;
             cmbCantEntradas.Location = new Point(536, 184);
             cmbCantEntradas.Name = "cmbCantEntradas";
-            cmbCantEntradas.Size = new Size(148, 23);
+            cmbCantEntradas.Size = new Size(165, 23);
             cmbCantEntradas.TabIndex = 6;
-            cmbCantEntradas.Text = "Cantidad de entradas";
+            cmbCantEntradas.Text = "Cantidad Entradas";
             // 
             // cmbComboBox
             // 
             cmbComboBox.FormattingEnabled = true;
             cmbComboBox.Location = new Point(536, 241);
             cmbComboBox.Name = "cmbComboBox";
-            cmbComboBox.Size = new Size(148, 23);
+            cmbComboBox.Size = new Size(165, 23);
             cmbComboBox.TabIndex = 7;
             cmbComboBox.Text = "ComboBox";
             // 
@@ -117,6 +117,7 @@
             bttnEditarDatos.TabIndex = 9;
             bttnEditarDatos.Text = "Editar datos";
             bttnEditarDatos.UseVisualStyleBackColor = true;
+            bttnEditarDatos.Click += bttnEditarDatos_Click;
             // 
             // VistaCliente
             // 
@@ -134,6 +135,8 @@
             Controls.Add(cmbPeliculas);
             Name = "VistaCliente";
             Text = "VistaCliente";
+            FormClosed += VistaCliente_FormClosed;
+            Load += VistaCliente_Load;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Hulej.Francisco._2C.TPFinal
@@ -30,19 +31,60 @@ namespace Hulej.Francisco._2C.TPFinal
             this.idComboBox = idComboBox;
         }
 
-        public List<Cliente> NuevoCliente(List<Cliente> listaClientes, string nombre, string apellido, double dni, double tarjeta, int cantEntradas, int idPelicula,int idComboBox)
+        public static int ValidarDni(string dni)
         {
-            Cliente nuevoCliente = new Cliente(nombre, apellido, dni, tarjeta, cantEntradas, idPelicula,idComboBox);
-            listaClientes.Add(nuevoCliente);
-            return listaClientes;
-        }
-    
-        public List<Cliente> EliminarCliente(List<Cliente> listaClientes,Guid nTransABuscar)
-        {
-            Cliente clienteAEliminar = listaClientes.FirstOrDefault(cliente => cliente.id == nTransABuscar);
-            listaClientes.Remove(clienteAEliminar);
-            return listaClientes;
+            if(dni.Length ==8) {
+                return int.Parse(dni);
+            }
+            else
+            {
+                throw new DniInvalidException("El dni tiene mas o menos de 8 caracteres");
+            }
         }
 
+        public static double ValidarTarjeta(string tarjeta)
+        {
+            if (tarjeta.Length >12 && tarjeta.Length<18)
+            {
+                return double.Parse(tarjeta);
+            }
+            else
+            {
+                throw new TarjetaInvalidException("La tarjeta no el numero de caracteres requerido");
+            }
+        }
+
+        public static void SerializarClientesJson(List<Cliente> listaClientes, string path ,string archivo)
+        {
+
+            string dir = Path.Combine(path, archivo);
+            JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions();
+            jsonSerializerOptions.WriteIndented = true;
+
+            using (StreamWriter sw = new StreamWriter(dir))
+            {
+                foreach (Cliente a in listaClientes)
+                {
+                    string clienteJson = JsonSerializer.Serialize(a, jsonSerializerOptions);
+                    sw.WriteLine(clienteJson);
+                }
+            }
+            
+        }
+        public static string DeSerializarClientesJson(string path, string archivo)
+        {
+
+            string dir = Path.Combine(path, archivo);     
+            List <Cliente> clientesImportados= new List<Cliente>();
+            using (StreamReader sr = new StreamReader(dir))
+            {
+                string json = sr.ReadToEnd();
+                clientesImportados = JsonSerializer.Deserialize<List<Cliente>>(json);
+                string nombre=clientesImportados[0].Nombre;
+                return nombre;
+            }
+
+        }
     }
+
 }

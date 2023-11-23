@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+
 
 namespace Hulej.Francisco._2C.TPFinal
 {
@@ -18,7 +20,6 @@ namespace Hulej.Francisco._2C.TPFinal
         public int CantEntradas { get => cantEntradas; set => cantEntradas = value; }
         public int Id { get => id;}
 
-        public static List<Pelicula> listaPeliculas;
 
         public Pelicula(string nombre, int duracion, int cantEntradas)
         {
@@ -34,9 +35,18 @@ namespace Hulej.Francisco._2C.TPFinal
             return listaPeliculas;
         }
 
-        public void QuitarProducto(Pelicula pelicula)
+        public bool QuitarProducto(List<Pelicula> pelicula,string nombre)
         {
-            pelicula.cantEntradas--;
+            foreach (Pelicula c in pelicula)
+            {
+                if (c.nombre == nombre)
+                {
+                    c.cantEntradas--;
+                    return true;
+                }
+            }
+            return false;
         }
+
     }
 }

@@ -8,6 +8,6 @@ namespace Hulej.Francisco._2C.TPFinal
 {
     public  interface IProducto<T>
     {
-         public void QuitarProducto(T producto);
+         public bool QuitarProducto(List <T> producto, string nombre);
     }
 }
